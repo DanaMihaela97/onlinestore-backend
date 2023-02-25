@@ -1,74 +1,34 @@
 package com.sda.onlinestore.entity;
 import jakarta.persistence.*;
-
+import java.util.ArrayList;
 import java.util.List;
-
-
 @Entity
+
 public class User {
     @Id
-
-    private Integer id;
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable=false)
     private String name;
-    @Column
-    private String password;
-    @Column
+
+    @Column(nullable=false, unique=true)
     private String email;
-    @Column
-    private String city;
-    @Column
-    private String avatar;
-    @Column
-    private String phoneNumber;
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="user_role")
-    private Role role;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-    List<OrderList> orders;
+    @Column(nullable=false)
+    private String password;
 
-    public User() {
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL) // eager = afiseaza toate relatiile/ lazy = doar daca e apelat de getter
+    @JoinTable(
+            name="user_role",
+            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+    private List<Role> roles = new ArrayList<>();
 
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public List<OrderList> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderList> orders) {
-        this.orders = orders;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,30 +48,22 @@ public class User {
         this.email = email;
     }
 
-    public String getCity() {
-        return city;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
-
-    public User(Integer id, String name, String email, String city, String avatar, String phoneNumber, Role role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.city = city;
-        this.avatar = avatar;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
+    public User() {
     }
 }

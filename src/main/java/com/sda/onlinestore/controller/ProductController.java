@@ -2,7 +2,7 @@ package com.sda.onlinestore.controller;
 
 import com.sda.onlinestore.dto.ProductCreateDto;
 import com.sda.onlinestore.dto.ProductInfoDto;
-import com.sda.onlinestore.dto.ProductShortInfoDto;
+
 import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +36,9 @@ public class ProductController {
         return ResponseEntity.ok("");
     }
     @GetMapping("/products/{title}")
-    public ResponseEntity<ProductShortInfoDto> findProductByTitle(@PathVariable String title){
-        ProductShortInfoDto productShortInfoDto = productService.findProductByTitle(title);
-        return ResponseEntity.ok(productShortInfoDto);
+    public ResponseEntity<ProductInfoDto> findProductByTitle(@PathVariable String title){
+        ProductInfoDto ProductInfoDtos = productService.findProductByTitle(title);
+        return ResponseEntity.ok(ProductInfoDtos);
     }
     @GetMapping("/products")
     public ResponseEntity<List<ProductInfoDto>> getAllProducts(){

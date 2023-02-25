@@ -29,7 +29,7 @@ public class OrderConvertor {
         orderInfoDto.setDeliveryAddress(orderList.getDeliveryAddress());
         orderInfoDto.setDateOfSubmission(orderList.getDateOfSubmission());
         orderInfoDto.setTotalCost(orderList.getTotalCost());
-        orderInfoDto.setUser_id(orderList.getUser().getId());
+
 
         return orderInfoDto;
     }

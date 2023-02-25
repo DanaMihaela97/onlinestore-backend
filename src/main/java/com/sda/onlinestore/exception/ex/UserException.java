@@ -1,4 +1,4 @@
-package com.sda.onlinestore.exception;
+package com.sda.onlinestore.exception.ex;
 
 public class UserException extends RuntimeException{
     public UserException(String message){

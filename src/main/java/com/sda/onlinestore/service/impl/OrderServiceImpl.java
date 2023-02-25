@@ -4,7 +4,7 @@ import com.sda.onlinestore.convertor.OrderConvertor;
 import com.sda.onlinestore.convertor.UserConvertor;
 import com.sda.onlinestore.dto.OrderCreateDto;
 import com.sda.onlinestore.dto.OrderInfoDto;
-import com.sda.onlinestore.dto.UserInfoDto;
+import com.sda.onlinestore.dto.UserDto;
 import com.sda.onlinestore.entity.OrderList;
 import com.sda.onlinestore.entity.User;
 import com.sda.onlinestore.repository.OrderRepository;
@@ -27,14 +27,19 @@ public class OrderServiceImpl implements OrderService {
         this.userService = userService;
     }
 
+//    @Override
+//    public OrderInfoDto createOrder(OrderCreateDto orderCreateDto) {
+//        UserDto userDto = userService.getUserById(orderCreateDto.getUserId());
+//        User user = UserConvertor.convertEntityToDto(userDto);
+//        OrderList orderlist = orderRepository.save(OrderConvertor.toEntity(orderCreateDto, user));
+//        OrderInfoDto orderInfoDto = OrderConvertor.entityToInfo(orderlist);
+//        return orderInfoDto;
+//
+//    }
+
     @Override
     public OrderInfoDto createOrder(OrderCreateDto orderCreateDto) {
-        UserInfoDto userInfoDto = userService.getUserById(orderCreateDto.getUserId());
-        User user = UserConvertor.toEntity(userInfoDto);
-        OrderList orderlist = orderRepository.save(OrderConvertor.toEntity(orderCreateDto, user));
-        OrderInfoDto orderInfoDto = OrderConvertor.entityToInfo(orderlist);
-        return orderInfoDto;
-
+        return null;
     }
 
     @Override

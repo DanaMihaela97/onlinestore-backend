@@ -1,12 +1,11 @@
 package com.sda.onlinestore.controller;
 
-import com.sda.onlinestore.convertor.ProductConvertor;
+
 import com.sda.onlinestore.dto.AuthorInfoDto;
-import com.sda.onlinestore.dto.ProductShortInfoDto;
+
+import com.sda.onlinestore.dto.ProductInfoDto;
 import com.sda.onlinestore.entity.Author;
-import com.sda.onlinestore.entity.Category;
-import com.sda.onlinestore.entity.Product;
-import com.sda.onlinestore.exception.AuthorException;
+
 import com.sda.onlinestore.service.AuthorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +34,8 @@ public class AuthorController {
         return ResponseEntity.ok(authors);
     }
     @GetMapping("/authors/{name}/products")
-    public ResponseEntity<List<ProductShortInfoDto>> getProductsByAuthor(@PathVariable String name){
-        List<ProductShortInfoDto> products=authorService.findProductsByAuthor(name);
+    public ResponseEntity<List<ProductInfoDto>> getProductsByAuthor(@PathVariable String name){
+        List<ProductInfoDto> products=authorService.findProductsByAuthor(name);
         return ResponseEntity.ok(products);
 
     }

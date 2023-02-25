@@ -3,9 +3,9 @@ package com.sda.onlinestore.service.impl;
 import com.sda.onlinestore.convertor.ProductConvertor;
 import com.sda.onlinestore.dto.ProductCreateDto;
 import com.sda.onlinestore.dto.ProductInfoDto;
-import com.sda.onlinestore.dto.ProductShortInfoDto;
+
 import com.sda.onlinestore.entity.Product;
-import com.sda.onlinestore.exception.ProductException;
+import com.sda.onlinestore.exception.ex.ProductException;
 import com.sda.onlinestore.repository.ProductRepository;
 import com.sda.onlinestore.service.AuthorService;
 import com.sda.onlinestore.service.CategoryService;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -44,10 +43,10 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
     @Override
-    public ProductShortInfoDto findProductByTitle(String title) {
+    public ProductInfoDto findProductByTitle(String title) {
         Product product = productRepository.findByTitle(title)
                 .orElseThrow(()->new ProductException("Product with title " + title + " was not found!"));
-        return ProductConvertor.convertEntityToShort(product);
+        return ProductConvertor.convertEntityToInfoDto(product);
     }
 
     @Override

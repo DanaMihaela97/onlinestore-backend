@@ -1,4 +1,4 @@
-package com.sda.onlinestore.exception;
+package com.sda.onlinestore.exception.ex;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
