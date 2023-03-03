@@ -1,5 +1,6 @@
 package com.sda.onlinestore.controller;
 
+import com.sda.onlinestore.convertor.CategoryConverter;
 import com.sda.onlinestore.convertor.ProductConvertor;
 import com.sda.onlinestore.dto.CategoryCreateDto;
 import com.sda.onlinestore.dto.CategoryInfoDto;
@@ -34,8 +35,8 @@ public class CategoryController {
     }
     @GetMapping("/categories")
     public ResponseEntity<List<CategoryInfoDto>>getAllCategories(){
-        List<CategoryInfoDto> categories = categoryService.findAll();
-        return ResponseEntity.ok(categories);
+        List<Category> categories = categoryService.findAll();
+        return ResponseEntity.ok(categories.stream().map(CategoryConverter::entityToInfo).toList());
     }
     @GetMapping("/categories/{name}/products")
     public ResponseEntity<List<ProductInfoDto>> getProductsByCateg(@PathVariable String name){

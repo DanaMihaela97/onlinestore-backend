@@ -38,10 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryInfoDto> findAll() {
-        List<CategoryInfoDto> categoryInfoDtos = new ArrayList<>();
-        categoryRepository.findAll().forEach(categ->categoryInfoDtos.add(CategoryConverter.entityToInfo(categ)));
-        return categoryInfoDtos;
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
 
     }
 

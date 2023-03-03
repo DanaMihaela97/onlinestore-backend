@@ -5,6 +5,7 @@ import com.sda.onlinestore.dto.ProductCreateDto;
 import com.sda.onlinestore.dto.ProductInfoDto;
 
 import com.sda.onlinestore.entity.Product;
+import com.sda.onlinestore.entity.ProductType;
 import com.sda.onlinestore.exception.ex.ProductException;
 import com.sda.onlinestore.repository.ProductRepository;
 import com.sda.onlinestore.service.AuthorService;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -30,6 +33,19 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
+    public List<ProductInfoDto> searchProduct(String searchTerm) {
+        List<ProductInfoDto> result = new ArrayList<>();
+        List<Product> products = productRepository.findAll();
+        for (Product product :
+                products) {
+            if(product.getTitle().toLowerCase().contains(searchTerm.toLowerCase())){
+                result.add(ProductConvertor.convertEntityToInfoDto(product));
+            }
+        }
+        return result;
+    }
+
+    @Override
     public ProductInfoDto createProduct(ProductCreateDto productCreateDto) {
         Product product = productRepository.save
                 (ProductConvertor.createDtoToEntity(productCreateDto,
@@ -43,9 +59,9 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
     @Override
-    public ProductInfoDto findProductByTitle(String title) {
-        Product product = productRepository.findByTitle(title)
-                .orElseThrow(()->new ProductException("Product with title " + title + " was not found!"));
+    public ProductInfoDto findProductById(String id) {
+        Product product = productRepository.findById(Integer.parseInt(id))
+                .orElseThrow(()->new ProductException("Product witvalueOfh id " + id + " was not found!"));
         return ProductConvertor.convertEntityToInfoDto(product);
     }
 
@@ -55,6 +71,22 @@ public class ProductServiceImpl implements ProductService {
         productRepository.findAll().forEach(product->productShortInfoDtos.add(ProductConvertor.convertEntityToInfoDto(product)));
         return productShortInfoDtos;
     }
+
+    @Override
+    public void updateProductDetails(Product product) {
+        Product productDB=productRepository.findById(product.getId()).get();
+        productDB.setTitle(product.getTitle());
+        productDB.setDescription(product.getDescription());
+        productDB.setPrice(product.getPrice());
+        productDB.setProductType(product.getProductType());
+        productDB.setCategory(product.getCategory());
+        productDB.setAuthor(product.getAuthor());
+        productRepository.save(productDB);
+    }
+
+
+
+
     /*public List<Product> getProductsByPrice(Double price){
         //List<ProductShortInfoDto> productShortInfoDtos = new ArrayList<>();
       return productRepository.findAll().stream().filter(el->el.getPrice().equals(price)).collect(Collectors.toList()); */

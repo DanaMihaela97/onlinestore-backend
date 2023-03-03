@@ -8,20 +8,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL) // eager = afiseaza toate relatiile/ lazy = doar daca e apelat de getter
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    // eager = afiseaza toate relatiile/ lazy = doar daca e apelat de getter
     @JoinTable(
-            name="user_role",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+            name = "user_role",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles = new ArrayList<>();
 
     public Long getId() {
@@ -63,6 +64,7 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
 
     public User() {
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface CategoryService {
     CategoryInfoDto createCategory(CategoryCreateDto categoryCreateDto);
     Category findByName(String name);
-    List<CategoryInfoDto> findAll();
+    List<Category> findAll();
 
 
 }
