@@ -53,11 +53,11 @@ public class ProductController {
         List<ProductInfoDto> allProducts = productService.getAllProducts();
         return ResponseEntity.ok(allProducts);
     }
-    @GetMapping("/search/{searchTerm}")
-    public ResponseEntity<List<ProductInfoDto>> searchProduct(@PathVariable String searchTerm){
-        List<ProductInfoDto> products = productService.searchProduct(searchTerm);
-        return ResponseEntity.ok(products);
-    }
+//    @GetMapping("/search/{searchTerm}")
+//    public ResponseEntity<List<ProductInfoDto>> searchProduct(@PathVariable String searchTerm){
+//        List<ProductInfoDto> products = productService.searchProduct(searchTerm);
+//        return ResponseEntity.ok(products);
+//    }
 @PutMapping("/products/{id}")
     public ResponseEntity<String> updateProduct(@RequestBody ProductCreateDto productDto, @PathVariable Integer id){
         Product product = ProductConvertor.createDtoToEntity(productDto,

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<ProductInfoDto> searchProduct(String searchTerm);
+  //  List<ProductInfoDto> searchProduct(String searchTerm);
     ProductInfoDto createProduct(ProductCreateDto productCreateDto);
     void deleteProduct(Integer id);
 

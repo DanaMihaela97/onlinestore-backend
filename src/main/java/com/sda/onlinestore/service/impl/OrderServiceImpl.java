@@ -27,21 +27,10 @@ public class OrderServiceImpl implements OrderService {
         this.userService = userService;
     }
 
-//    @Override
-//    public OrderInfoDto createOrder(OrderCreateDto orderCreateDto) {
-//        UserDto userDto = userService.getUserById(orderCreateDto.getUserId());
-//        User user = UserConvertor.convertEntityToDto(userDto);
-//        OrderList orderlist = orderRepository.save(OrderConvertor.toEntity(orderCreateDto, user));
-//        OrderInfoDto orderInfoDto = OrderConvertor.entityToInfo(orderlist);
-//        return orderInfoDto;
-//
-//    }
-
     @Override
     public OrderInfoDto createOrder(OrderCreateDto orderCreateDto) {
         return null;
     }
-
     @Override
     public List<OrderInfoDto> findAll() {
         return orderRepository.findAll().stream().map(OrderConvertor::entityToInfo).toList();

@@ -1,6 +1,4 @@
 package com.sda.onlinestore.service.impl;
-
-
 import com.sda.onlinestore.convertor.CategoryConverter;
 import com.sda.onlinestore.convertor.ProductConvertor;
 import com.sda.onlinestore.dto.CategoryCreateDto;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -31,7 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryInfoDto categoryCreateDto1 = CategoryConverter.entityToInfo(category);
         return categoryCreateDto1;
     }
-
     @Override
     public Category findByName(String name) {
         return categoryRepository.findById(name).get();
@@ -42,5 +38,4 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll();
 
     }
-
 }

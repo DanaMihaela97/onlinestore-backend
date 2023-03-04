@@ -53,10 +53,7 @@ public class UserServiceImpl implements UserService {
         user.setRoles(Arrays.asList(role));
 
         userRepository.save(user);
-
     }
-
-
     @Override
     public UserDto getUser(Long id) {
         Optional<User> userOptional = userRepository.findById(id);

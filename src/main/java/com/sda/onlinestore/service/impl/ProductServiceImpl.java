@@ -30,21 +30,18 @@ public class ProductServiceImpl implements ProductService {
         this.authorService = authorService;
         this.categoryService = categoryService;
     }
-
-
-    @Override
-    public List<ProductInfoDto> searchProduct(String searchTerm) {
-        List<ProductInfoDto> result = new ArrayList<>();
-        List<Product> products = productRepository.findAll();
-        for (Product product :
-                products) {
-            if(product.getTitle().toLowerCase().contains(searchTerm.toLowerCase())){
-                result.add(ProductConvertor.convertEntityToInfoDto(product));
-            }
-        }
-        return result;
-    }
-
+//    @Override
+//    public List<ProductInfoDto> searchProduct(String searchTerm) {
+//        List<ProductInfoDto> result = new ArrayList<>();
+//        List<Product> products = productRepository.findAll();
+//        for (Product product :
+//                products) {
+//            if(product.getTitle().toLowerCase().contains(searchTerm.toLowerCase())){
+//                result.add(ProductConvertor.convertEntityToInfoDto(product));
+//            }
+//        }
+//        return result;
+//    }
     @Override
     public ProductInfoDto createProduct(ProductCreateDto productCreateDto) {
         Product product = productRepository.save
@@ -83,13 +80,5 @@ public class ProductServiceImpl implements ProductService {
         productDB.setAuthor(product.getAuthor());
         productRepository.save(productDB);
     }
-
-
-
-
-    /*public List<Product> getProductsByPrice(Double price){
-        //List<ProductShortInfoDto> productShortInfoDtos = new ArrayList<>();
-      return productRepository.findAll().stream().filter(el->el.getPrice().equals(price)).collect(Collectors.toList()); */
-
 
 }
