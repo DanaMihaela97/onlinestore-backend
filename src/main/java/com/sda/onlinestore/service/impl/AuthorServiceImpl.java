@@ -6,7 +6,7 @@ import com.sda.onlinestore.dto.AuthorInfoDto;
 import com.sda.onlinestore.dto.ProductInfoDto;
 
 import com.sda.onlinestore.entity.Author;
-import com.sda.onlinestore.exception.ex.AuthorException;
+
 import com.sda.onlinestore.repository.AuthorRepository;
 import com.sda.onlinestore.service.AuthorService;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
     public List<ProductInfoDto> findProductsByAuthor(String name) {
        Author author = authorRepository.findById(name).get();
        if (author== null || author.getProducts().isEmpty()){
-           throw new AuthorException(String.format("Author with name %s doesn't have products!", name));
+           throw new IllegalArgumentException(String.format("Author with name %s doesn't have products!", name));
        } else {
            return author.getProducts().stream().map(ProductConvertor::convertEntityToInfoDto).collect(Collectors.toList());
        }

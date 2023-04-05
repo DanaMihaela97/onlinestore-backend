@@ -1,37 +1,42 @@
 package com.sda.onlinestore.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sda.onlinestore.entity.User;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Transient;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 public class OrderCreateDto {
-//    @NotBlank(message="This field is mandatory.")
-//    private String userName;
-//    @Email(message="Invalid email")
-//    @NotBlank(message="This field cannot be empty.")
-//    private String userEmail;
     private String phoneNumber;
     private Double totalCost;
-    @NotBlank(message="This field is mandatory.")
+    private String city;
+
     private String deliveryAddress;
-    private Date dateOfSubmission;
-    private Integer user_id;
+//    @Transient // calc pt tine
+//    @JsonFormat(pattern="yyyy-MM-DD HH:mm:ss")
+    private LocalDateTime dateOfSubmission;
+    private String user_email;
 
-
-    public Integer getUserId() {
-        return user_id;
+    public String getCity() {
+        return city;
     }
 
-    public void setUserId(Integer user_id) {
-        this.user_id = user_id;
+    public void setCity(String city) {
+        this.city = city;
     }
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
+
 
 
     // de facut update pe status
-
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -40,21 +45,6 @@ public class OrderCreateDto {
         this.phoneNumber = phoneNumber;
     }
 
-//    public String getUserEmail() {
-//        return userEmail;
-//    }
-//
-//    public void setUserEmail(String email) {
-//        this.userEmail = email;
-//    }
-//
-//    public String getUserName() {
-//        return userName;
-//    }
-//
-//    public void setUserName(String userName) {
-//        this.userName = userName;
-//    }
 
     public Double getTotalCost() {
         return totalCost;
@@ -72,11 +62,13 @@ public class OrderCreateDto {
         this.deliveryAddress = deliveryAddress;
     }
 
-    public Date getDateOfSubmission() {
+    public LocalDateTime getDateOfSubmission() {
         return dateOfSubmission;
     }
 
-    public void setDateOfSubmission(Date dateOfSubmission) {
+    public void setDateOfSubmission(LocalDateTime dateOfSubmission) {
         this.dateOfSubmission = dateOfSubmission;
     }
+
+
 }

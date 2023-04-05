@@ -10,6 +10,7 @@ import com.sda.onlinestore.service.CategoryService;
 import com.sda.onlinestore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public class ProductController {
         return ResponseEntity.ok(productInfoDto);
     }
     @DeleteMapping("/products/{id}")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id){
         productService.deleteProduct(id);
         return ResponseEntity.ok("");

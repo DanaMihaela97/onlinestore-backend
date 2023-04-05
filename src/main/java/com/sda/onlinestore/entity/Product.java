@@ -27,6 +27,7 @@ public class Product {
     private Category category;
 
 
+
     public ProductType getProductType() {
         return productType;
     }

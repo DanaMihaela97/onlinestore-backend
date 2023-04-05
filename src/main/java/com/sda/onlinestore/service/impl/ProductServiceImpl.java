@@ -3,10 +3,7 @@ package com.sda.onlinestore.service.impl;
 import com.sda.onlinestore.convertor.ProductConvertor;
 import com.sda.onlinestore.dto.ProductCreateDto;
 import com.sda.onlinestore.dto.ProductInfoDto;
-
 import com.sda.onlinestore.entity.Product;
-import com.sda.onlinestore.entity.ProductType;
-import com.sda.onlinestore.exception.ex.ProductException;
 import com.sda.onlinestore.repository.ProductRepository;
 import com.sda.onlinestore.service.AuthorService;
 import com.sda.onlinestore.service.CategoryService;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -57,9 +53,10 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public ProductInfoDto findProductById(String id) {
-        Product product = productRepository.findById(Integer.parseInt(id))
-                .orElseThrow(()->new ProductException("Product witvalueOfh id " + id + " was not found!"));
-        return ProductConvertor.convertEntityToInfoDto(product);
+        Product product = productRepository.findById(Integer.parseInt(id)).orElseThrow(()
+                        ->new IllegalArgumentException(String.format("Product with id %s does not exist", id)));
+        ProductInfoDto productInfoDto = ProductConvertor.convertEntityToInfoDto(product);
+        return productInfoDto;
     }
 
     @Override
